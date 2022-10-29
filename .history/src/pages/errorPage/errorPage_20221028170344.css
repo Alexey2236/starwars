@@ -1,0 +1,24 @@
+.error-page {
+  padding: 23px 82px 183px 82px;
+  background: #17002f;
+}
+
+.error {
+  position: relative;
+
+  font-family: "Karla";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 700px;
+  line-height: 818px;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+
+.error-banner {
+  max-width: 90%;
+  position: absolute;
+  top: 120px;
+  left: 310px;
+}

@@ -1,0 +1,12 @@
+.home-page {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(180deg, #1f2a63 0%, #17002f 100%);
+}
+
+.home-page-descr {
+    width: 506px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 64px;
+}
