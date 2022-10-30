@@ -6,32 +6,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { useDebounce } from "../../hooks/useDebounce";
-import "./characters.css";
 
+import "./characters.css";
 
 function CharactersPage() {
   const [openModal, setOpenModal] = useState(false);
   const [value, setValue] = useState("");
   const [page, setPage] = useState(1);
-  const debouncedValue = useDebounce(value, 500)
 
   const dispatch = useDispatch();
   let characters = useSelector((state) => state.characters);
   const charDescrItem = useSelector((state) => state.charItemDescr);
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  useEffect(() => {
-    dispatch(charLoad(page));
-  }, [page]);
-
-  useEffect(() => {
-    dispatch(searchChar(value));
-  }, [debouncedValue])
-
 
   const openModalFn = () => {
     setOpenModal(true);
@@ -40,12 +25,24 @@ function CharactersPage() {
     setOpenModal(false);
   };
 
+ 
+
+  function searchCharacters(e, value) {
+    dispatch(searchChar(value));
+    setValue(e.target.value);
+
+  }
+
   function getDescrCharacters(url) {
     openModalFn(true);
     dispatch(getDescrChar(url));
   }
 
- 
+  useEffect(() => {
+    dispatch(charLoad(page));
+  }, [page]);
+  console.log(characters)
+
   return (
     <div className="characters-page">
       <h1 className="char-title">
@@ -56,10 +53,10 @@ function CharactersPage() {
         type="text"
         placeholder="find..."
         value={value}
-        onChange={handleChange}
+        onChange={(e) => searchCharacters(e, value)}
       />
       <div className="char-list">
-        {characters.results ? (
+        {characters.results.length !== null ? (
           characters.results.map((char) => {
             return (
               <CharCard

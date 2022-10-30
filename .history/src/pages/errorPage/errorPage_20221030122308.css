@@ -9,9 +9,9 @@
   position: relative;
 }
 .error {
+  padding-top: -200px;
   display: flex;
   justify-content: center;
-  align-items: start;
   position: relative;
   font-family: "Karla";
   font-style: normal;

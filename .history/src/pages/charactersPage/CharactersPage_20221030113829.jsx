@@ -6,32 +6,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { useDebounce } from "../../hooks/useDebounce";
-import "./characters.css";
 
+import "./characters.css";
 
 function CharactersPage() {
   const [openModal, setOpenModal] = useState(false);
   const [value, setValue] = useState("");
   const [page, setPage] = useState(1);
-  const debouncedValue = useDebounce(value, 500)
 
   const dispatch = useDispatch();
   let characters = useSelector((state) => state.characters);
   const charDescrItem = useSelector((state) => state.charItemDescr);
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  useEffect(() => {
-    dispatch(charLoad(page));
-  }, [page]);
-
-  useEffect(() => {
-    dispatch(searchChar(value));
-  }, [debouncedValue])
-
 
   const openModalFn = () => {
     setOpenModal(true);
@@ -40,12 +25,31 @@ function CharactersPage() {
     setOpenModal(false);
   };
 
+  const debounce = (fn, ms) => {
+    let timeout;
+    return function () {
+      const fnCall = () => {
+        fn.apply(this, arguments);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(fnCall, ms);
+    };
+  };
+  function searchCharacters(e, value) {
+    setValue(e.target.value);
+    dispatch(searchChar(value));
+    setValue(' ')
+  }
+
   function getDescrCharacters(url) {
     openModalFn(true);
     dispatch(getDescrChar(url));
   }
 
- 
+  useEffect(() => {
+    dispatch(charLoad(page));
+  }, [page]);
+
   return (
     <div className="characters-page">
       <h1 className="char-title">
@@ -56,7 +60,7 @@ function CharactersPage() {
         type="text"
         placeholder="find..."
         value={value}
-        onChange={handleChange}
+        onChange={(e) => debounce(searchCharacters(e, value), 2000)}
       />
       <div className="char-list">
         {characters.results ? (
@@ -95,3 +99,34 @@ function CharactersPage() {
 }
 
 export default CharactersPage;
+
+{
+  /* <div className="button-wrapper">
+<button
+  className="home-page-btn"
+  onClick={prevPage}
+  disabled={page === 2 ? true : false}
+>
+  Prev Page
+</button>
+<h1>{page}</h1>
+<button
+  className="home-page-btn"
+  onClick={nextPage}
+  disabled={page === Math.ceil(characters.count / 10) ? true : false}
+>
+  Next Page
+</button>
+</div> */
+}
+
+// function nextPage() {
+//   setPage(page + 1);
+
+//   dispatch(charLoad(page));
+// }
+
+// function prevPage() {
+//   setPage(page - 1);
+//   dispatch(charLoad(page));
+// }

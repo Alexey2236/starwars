@@ -6,9 +6,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { useDebounce } from "../../hooks/useDebounce";
 import "./characters.css";
 
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedValue(value), delay || 500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
 
 function CharactersPage() {
   const [openModal, setOpenModal] = useState(false);
@@ -29,7 +41,8 @@ function CharactersPage() {
   }, [page]);
 
   useEffect(() => {
-    dispatch(searchChar(value));
+    // Do fetch here...
+    // Triggers when "debouncedValue" changes
   }, [debouncedValue])
 
 
@@ -39,6 +52,11 @@ function CharactersPage() {
   const closeModalFn = () => {
     setOpenModal(false);
   };
+
+  function searchCharacters(e, value) {
+    dispatch(searchChar(value));
+    setValue(e.target.value);
+  }
 
   function getDescrCharacters(url) {
     openModalFn(true);
@@ -56,7 +74,7 @@ function CharactersPage() {
         type="text"
         placeholder="find..."
         value={value}
-        onChange={handleChange}
+        onChange={(e) => searchCharacters(e, value)}
       />
       <div className="char-list">
         {characters.results ? (

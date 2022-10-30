@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { useDebounce } from "../../hooks/useDebounce";
+import { useDebounce } from "../../useDebounce";
 import "./characters.css";
 
 
@@ -39,6 +39,8 @@ function CharactersPage() {
   const closeModalFn = () => {
     setOpenModal(false);
   };
+
+
 
   function getDescrCharacters(url) {
     openModalFn(true);

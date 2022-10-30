@@ -7,7 +7,7 @@ function App() {
   return (
     <HashRouter basename="/">
       <div className="App">
-        <Header />
+        {window.location.pathname === "/" ? null : <Header />}
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route exact path="/characters" element={<CharactersPage />} />

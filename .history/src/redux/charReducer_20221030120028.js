@@ -5,7 +5,7 @@ export const charactersReducer = (state = [], action) => {
     case CHAR_LOAD:
       return { ...state, ...action.data };
     case SEARCH_CHAR:
-      return { ...state, ...action.searchData};
+      return { ...state, ...action.searchData };
     default:
       return state;
   }
