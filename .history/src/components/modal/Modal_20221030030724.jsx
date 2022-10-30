@@ -78,10 +78,9 @@ function Modal({ closeModalFn, charDescrItem }) {
               <div className="desrc-char-block">
                 <div className="name-char">{name}</div>
                 <div className="skin">
-                  {hair_color !== 'n/a' ? <div>hair color: {hair_color}</div> : null}
-                  {skin_color !== 'n/a' ? <div>skin color: {skin_color}</div> : null}
-                  {eye_color !== 'n/a' ? <div>eye color: {eye_color}</div> : null}
-
+                  <div>hair color: {hair_color}</div>
+                  <div>skin color - {skin_color}</div>
+                  <div>eye color: {eye_color}</div>
                 </div>
                 <div className="param-wrapper">
                   <div className="height-modal">
