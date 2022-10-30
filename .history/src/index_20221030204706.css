@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400;500;600;700;800&family=Source+Sans+Pro&display=swap");
+body {
+  font-family: "Karla", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+  text-decoration: none;
+}
+input:active {
+  border: none;
+}
+
+input{
+  outline: none;
+}
+
+.container {
+  max-width: 1125px;
+  margin: 0 auto;
+}
