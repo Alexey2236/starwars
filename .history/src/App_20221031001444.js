@@ -19,10 +19,7 @@ function App() {
   });
   return transition((props, item) => (
     <>
-      {location.pathname !== "/" &&
-      location.pathname !== "/characters" ? null : (
-        <Header />
-      )}
+      <Header />
       <div className="App">
         <animated.div style={props}>
           <Routes location={item}>
