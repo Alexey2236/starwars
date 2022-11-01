@@ -2,21 +2,22 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getDescrChar } from "../../redux/actions";
 import Modal from "../modal/Modal";
+
 import "./charCard.css";
 
 function CharCard({ name, height, mass, birth_year, gender, url }) {
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
 
-  const getDescriptionsCharacters = (url) => {
+  function getDescriptionsCharacters(url) {
     dispatch(getDescrChar(url));
     setOpenModal(true);
-  };
+  }
 
-  const closeModal = () => {
-    setOpenModal(false);
-  };
-
+  function closeModal() {
+    setOpenModal((openModal) => (openModal = false));
+    console.log("close");
+  }
   let backgroundGender;
   switch (gender) {
     case "male":
@@ -33,7 +34,7 @@ function CharCard({ name, height, mass, birth_year, gender, url }) {
   }
   return (
     <>
-      {openModal === true ? <Modal closeModal={closeModal} /> : null}
+      {openModal ? <Modal closeModal={closeModal} /> : null}
 
       <div className="char-card" onClick={() => getDescriptionsCharacters(url)}>
         <div className="char-name">{name}</div>

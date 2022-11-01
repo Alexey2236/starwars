@@ -34,7 +34,7 @@ function CharactersPage() {
   return (
     <div className="characters-page">
       <h1 className="char-title">
-        {characters?.count} Peoples for you to choose your favorite
+        {characters.count} Peoples for you to choose your favorite
       </h1>
       <input
         className="char-search"

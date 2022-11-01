@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import { useDebounce } from "../../hooks/useDebounce";
 import CharCard from "../../components/charCard/CharCard";
-import Paginations from "../../components/Pagination/Pagination";
+import Paginations from "../../components/Pagination.jsx/Pagination";
 import "./characters.css";
 
 function CharactersPage() {
@@ -19,10 +19,6 @@ function CharactersPage() {
     setValue(event.target.value);
   };
 
-  const numPage = (page) => {
-    setPage(page);
-  };
-
   useEffect(() => {
     dispatch(charLoad(page));
   }, [page]);
@@ -34,7 +30,7 @@ function CharactersPage() {
   return (
     <div className="characters-page">
       <h1 className="char-title">
-        {characters?.count} Peoples for you to choose your favorite
+        {characters.count} Peoples for you to choose your favorite
       </h1>
       <input
         className="char-search"
@@ -46,7 +42,13 @@ function CharactersPage() {
       <div className="char-list">
         {characters.results ? (
           characters.results.map((char) => {
-            return <CharCard key={char.name} {...char} />;
+            return (
+              <CharCard
+                key={char.name}
+                {...char}
+                
+              />
+            );
           })
         ) : (
           <BeatLoader color="grey" />
@@ -54,7 +56,7 @@ function CharactersPage() {
       </div>
 
       {characters ? (
-        <Paginations page={page} characters={characters} numPage={numPage} />
+        <Paginations/>
       ) : null}
     </div>
   );

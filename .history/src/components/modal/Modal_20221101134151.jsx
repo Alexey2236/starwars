@@ -5,7 +5,7 @@ import woman from "../../img/woman.png";
 import close from "../../img/close.png";
 
 import "./modal.css";
-function Modal({closeModal}) {
+function Modal({ closeModal }) {
   const {
     gender,
     name,

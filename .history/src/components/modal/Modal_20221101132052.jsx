@@ -5,7 +5,7 @@ import woman from "../../img/woman.png";
 import close from "../../img/close.png";
 
 import "./modal.css";
-function Modal({closeModal}) {
+function Modal({ closeModalFn }) {
   const {
     gender,
     name,
@@ -45,7 +45,7 @@ function Modal({closeModal}) {
             className="close"
             src={close}
             alt="close"
-            onClick={closeModal}
+            onClick={closeModalFn}
           />
           <div className="modal-wrapper">
             <div className="gender-block">

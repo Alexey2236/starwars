@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getDescrChar } from "../../redux/actions";
 import Modal from "../modal/Modal";
+
 import "./charCard.css";
 
 function CharCard({ name, height, mass, birth_year, gender, url }) {
